@@ -38,7 +38,7 @@ class ANP_Model(nn.Module):
                                              hidden_dim_list=self.mlp_hidden_size_list,
                                              latent_dim=self.latent_dim)
 
-        # NOTICE : Decoder
+        # NOTICE: Decoder
         self._decoder = Decoder(x_dim=self.x_dim,
                                 y_dim=self.y_dim,
                                 mid_hidden_dim_list=self.mlp_hidden_size_list,
@@ -71,11 +71,12 @@ class ANP_Model(nn.Module):
         #   soobinseo: latent_rep = prior/poster
         #   3spring :  latent_rep = prior/poster .loc
         # TODO: loc will work, change to sample later
+        
         if target_y is not None:
             # NOTICE: Training      *(context = test) for neural process
             post_dist, post_mu, post_sigma = self._latent_encoder(target_x, target_y)
-            print("pr", prior_dist)
-            print("po", post_dist)
+            #print("pr", prior_dist)
+            #print("po", post_dist)
             Z = post_dist.loc
         else:
             # NOTICE: Testing
@@ -101,7 +102,7 @@ class ANP_Model(nn.Module):
 
         # If we want to calculate the log_prob for training we will make use of the
         # target_y. At test time the target_y is not available so we return None.
-        if target_y is not None:
+        if target_y is not None: #training
             # get log probability
             # Get KL between prior and posterior
             kl = torch.distributions.kl_divergence(post_dist, prior_dist).mean(-1)
