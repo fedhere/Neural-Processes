@@ -74,6 +74,7 @@ class ANP_Model(nn.Module):
         if target_y is not None:
             # NOTICE: Training      *(context = test) for neural process
             post_dist, post_mu, post_sigma = self._latent_encoder(target_x, target_y)
+            print(post_dist)
             Z = post_dist.loc
         else:
             # NOTICE: Testing
