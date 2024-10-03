@@ -112,7 +112,7 @@ class ANP_Model(nn.Module):
             #log_p = 0
             #print(log_p, loss_kl)
             loss = - (log_p - loss_kl).mean()
-            loss = loss_kl.mean()
+            #loss = loss_kl.mean()
             
         else:
             log_p = None
