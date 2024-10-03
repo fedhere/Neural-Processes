@@ -109,9 +109,10 @@ class ANP_Model(nn.Module):
             # log_p = dist.log_prob(target_y).mean(-1)
             loss_kl = kl[:, None].expand(log_p.shape)
             # print('torch.mean(loss_kl) =', torch.mean(loss_kl))
-            log_p = 0
+            #log_p = 0
             print(log_p, loss_kl)
             loss = - (log_p - loss_kl).mean()
+            loss = loss_kl.mean()
             
         else:
             log_p = None
