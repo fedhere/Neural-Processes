@@ -106,9 +106,9 @@ class ANP_Model(nn.Module):
             # get log probability
             # Get KL between prior and posterior
             kl = torch.distributions.kl_divergence(post_dist, prior_dist).mean(-1)
-            print("shape of dist", dist.log_prob(target_y).size())
+            #print("shape of dist", dist.log_prob(target_y).size())
             log_p = dist.log_prob(target_y).mean(-1)
-            print('log_p.size() =', log_p.size())
+            #print('log_p.size() =', log_p.size())
             # log_p = dist.log_prob(target_y).mean(-1)
             loss_kl = kl[:, None].expand(log_p.shape)
             print('torch.mean(loss_kl) =', torch.mean(loss_kl))
