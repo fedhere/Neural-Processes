@@ -83,7 +83,7 @@ class LatentEncoder(nn.Module):
 
         # NOTICE:Pass final axis through MLP
         # print('encoder_input.size() =', encoder_input.size())
-        if self.use_lstm:
+        if self._use_lstm:
         	hidden = self._encoder(encoder_input)
         	hidden = self.latent_encoder_mlp(hidden)
         else:
