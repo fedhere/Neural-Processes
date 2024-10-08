@@ -35,7 +35,7 @@ class LatentEncoder(nn.Module):
         self_attention_type="dot",
         use_self_attn=True,
         attention_layers=2,
-        use_lstm=False,
+        #use_lstm=False,
 	use_lstm=True
     ):
         super().__init__()
