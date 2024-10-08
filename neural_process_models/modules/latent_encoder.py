@@ -42,13 +42,14 @@ class LatentEncoder(nn.Module):
         self.hidden_dim_list = hidden_dim_list
         self.hidden_dim = hidden_dim_list[-1]
         self.latent_dim = latent_dim
-
+	self._use_lstm = use_lstm
+	    
         if latent_dim != hidden_dim_list[-1]:
             print('Warning, Check the dim of latent z and the dim of mlp last layer!')
 
         # NOTICE: On my paper, we seems to substitute the mlp with LSTM
         #  but we actually add a LSTM before the mlp
-        if self.use_lstm:
+        if use_lstm:
             self._encoder = LSTMBlock(self.input_dim, self.hidden_dim, 2, self.hidden_dim)
             self.latent_encoder_mlp = MLP(input_size=self.hidden_dim, output_size_list=hidden_dim_list)
             pass
@@ -70,7 +71,7 @@ class LatentEncoder(nn.Module):
 
         self.mean_layer = nn.Linear(self.penultimate_hidden_num, self.latent_dim)
         self.std_layer = nn.Linear(self.penultimate_hidden_num, self.latent_dim)
-        self._use_lstm = use_lstm
+        
         self._use_self_attn = use_self_attn
 
     def forward(self, x, y):
