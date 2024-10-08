@@ -42,7 +42,7 @@ class LatentEncoder(nn.Module):
         self.hidden_dim_list = hidden_dim_list
         self.hidden_dim = hidden_dim_list[-1]
         self.latent_dim = latent_dim
-	self._use_lstm = use_lstm
+        self._use_lstm = use_lstm
 	    
         if latent_dim != hidden_dim_list[-1]:
             print('Warning, Check the dim of latent z and the dim of mlp last layer!')
