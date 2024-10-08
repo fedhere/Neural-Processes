@@ -95,10 +95,9 @@ class LatentEncoder(nn.Module):
         # NOTICE: Aggregator: take the mean over all points
         if self._use_self_attn:
             hidden_s_i = self._self_attention(hidden, hidden, hidden)
-            hidden_s_c = hidden_s_i.mean(dim=1)
         else:
             hidden_s_i = hidden
-            hidden_s_c = hidden_s_i.mean(dim=1)
+        hidden_s_c = hidden_s_i.mean(dim=1)
         # hidden_s_c (b, 1, hidden_dim)
         # Comment, Here assume all the sequence (x, y pair) comes
         # from the same stochastic process (dynamics)
