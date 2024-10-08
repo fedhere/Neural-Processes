@@ -35,7 +35,7 @@ class LatentEncoder(nn.Module):
         self_attention_type="dot",
         use_self_attn=True,
         attention_layers=2,
-        use_lstm=True
+        use_lstm=False #True
     ):
         super().__init__()
         self.input_dim = input_x_dim + input_y_dim
