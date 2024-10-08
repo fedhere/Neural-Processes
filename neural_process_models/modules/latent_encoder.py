@@ -48,8 +48,9 @@ class LatentEncoder(nn.Module):
         # NOTICE: On my paper, we seems to substitute the mlp with LSTM
         #  but we actually add a LSTM before the mlp
         if use_lstm:
-            # self._encoder = LSTMBlock(input_dim, hidden_dim, batchnorm=batchnorm, dropout=dropout,
-            #                           num_layers=n_encoder_layers)
+            self._encoder = LSTMBlock(input_dim, hidden_dim, batchnorm=batchnorm, dropout=dropout,
+                                       num_layers=n_encoder_layers)
+            self.latent_encoder_mlp = MLP(input_size=self.hidden_dim, output_size_list=hidden_dim_list)
             pass
         else:
             self.latent_encoder_mlp = MLP(input_size=self.input_dim, output_size_list=hidden_dim_list)
@@ -81,7 +82,11 @@ class LatentEncoder(nn.Module):
 
         # NOTICE:Pass final axis through MLP
         # print('encoder_input.size() =', encoder_input.size())
-        hidden = self.latent_encoder_mlp(encoder_input)
+        if use_lstm:
+        	hidden = self._encoder(encoder_input)
+	 	hidden = self.latent_encoder_mlp(hidden)
+	else:
+		hidden = self.latent_encoder_mlp(encoder_input)		
         # hidden (b, seq_len, hidden_dim)
 
 
