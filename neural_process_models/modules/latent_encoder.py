@@ -21,6 +21,7 @@ import torch
 from torch import nn
 
 from .mlp import MLP
+from .lstm import LSTMBlock
 from .attention import Attention
 
 
