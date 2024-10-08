@@ -53,7 +53,6 @@ class LatentEncoder(nn.Module):
         if use_lstm:
             self._encoder = LSTMBlock(self.input_dim, self.hidden_dim, 3, self.hidden_dim)
             self.latent_encoder_mlp = MLP(input_size=self.hidden_dim, output_size_list=hidden_dim_list[-1])
-            pass
         else:
             self.latent_encoder_mlp = MLP(input_size=self.input_dim, output_size_list=hidden_dim_list[-1])
             # Output should be (b, seq_len, hidden_dim_list[-1])
