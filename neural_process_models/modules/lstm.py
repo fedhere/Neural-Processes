@@ -1,5 +1,5 @@
 
-
+import torch
 from torch import nn
 
 class LSTMBlock(nn.Module):
