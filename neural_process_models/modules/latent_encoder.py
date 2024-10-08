@@ -84,7 +84,7 @@ class LatentEncoder(nn.Module):
         # print('encoder_input.size() =', encoder_input.size())
         if use_lstm:
         	hidden = self._encoder(encoder_input)
-	 	hidden = self.latent_encoder_mlp(hidden)
+        	hidden = self.latent_encoder_mlp(hidden)
 	else:
 		hidden = self.latent_encoder_mlp(encoder_input)		
         # hidden (b, seq_len, hidden_dim)
