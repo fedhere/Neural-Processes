@@ -34,7 +34,7 @@ class LatentEncoder(nn.Module):
         self_attention_type="dot",
         use_self_attn=True,
         attention_layers=2,
-        use_lstm=False
+        use_lstm=True
     ):
         super().__init__()
         self.input_dim = input_x_dim + input_y_dim
@@ -82,7 +82,7 @@ class LatentEncoder(nn.Module):
 
         # NOTICE:Pass final axis through MLP
         # print('encoder_input.size() =', encoder_input.size())
-        if use_lstm:
+        if self.use_lstm:
         	hidden = self._encoder(encoder_input)
         	hidden = self.latent_encoder_mlp(hidden)
         else:
