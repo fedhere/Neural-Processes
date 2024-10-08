@@ -4,7 +4,7 @@ from torch import nn
 
 class LSTMBlock(nn.Module):
     def __init__(self, input_dim, hidden_dim, layer_dim, output_dim):
-        super(LSTMModel, self).__init__()
+        super(LSTMBlock, self).__init__()
         # Hidden dimensions
         self.hidden_dim = hidden_dim
 
